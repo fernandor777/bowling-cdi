@@ -1,6 +1,7 @@
 package org.fmino.bowlingscore.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,11 +16,24 @@ public class PlayerFrame implements Serializable {
 	public static final String FAULT = "F";
 	
 	private Integer number;
-	private List<String> scores;
-	private Integer total;
+	private List<String> scores = new ArrayList<>();
+	private Integer frameScore = 0;
+	
 	
 	public PlayerFrame() {
 	}
+	
+	public Integer addFrameScore(Integer value){
+		frameScore = frameScore + value;
+		return frameScore;
+	}
+
+	public PlayerFrame(Integer number) {
+		super();
+		this.number = number;
+	}
+
+
 
 	public Integer getNumber() {
 		return number;
@@ -37,12 +51,12 @@ public class PlayerFrame implements Serializable {
 		this.scores = scores;
 	}
 
-	public Integer getTotal() {
-		return total;
+	public Integer getFrameScore() {
+		return frameScore;
 	}
 
-	public void setTotal(Integer total) {
-		this.total = total;
+	public void setFrameScore(Integer frameScore) {
+		this.frameScore = frameScore;
 	}
 	
 	
