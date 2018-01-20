@@ -101,7 +101,7 @@ public class PlayerCardFacadeImpl implements PlayerCardFacade {
 		return score;
 	}
 	
-	private Boolean isStrike(List<Pinfall> scores, Integer pinfallIndex){
+	public Boolean isStrike(List<Pinfall> scores, Integer pinfallIndex){
 		if(scores.get(pinfallIndex).getScore().intValue()==10) return true;
 		return false;
 	}

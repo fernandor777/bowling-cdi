@@ -18,27 +18,35 @@ import org.fmino.bowlingscore.api.BowlingScoreProcessor;
  */
 public class BowlingScoreAppMain {
 	
+	private static CdiContainer cdiContainer;
+	
 	/**
 	 * Main App start method
 	 * @param args
 	 */
 	public static void main(String[] args){
+		startCDI();
 		
-		CdiContainer cdiContainer = CdiContainerLoader.getCdiContainer();
+		/**
+		 * Producer method for contextual reference
+		 */
+        BowlingScoreProcessor processor = BeanProvider.getContextualReference(BowlingScoreProcessor.class);
+        processor.processScore(args[0]);
+        
+        stopCDI();
+	}
+	
+	private static void startCDI(){
+		cdiContainer = CdiContainerLoader.getCdiContainer();
 		cdiContainer.boot();
 		
 		ContextControl contextControl = cdiContainer.getContextControl();
         contextControl.startContext(ApplicationScoped.class);
         contextControl.startContext(RequestScoped.class);
         contextControl.startContext(ConversationScoped.class);
-		
-        BowlingScoreProcessor processor = BeanProvider.getContextualReference(BowlingScoreProcessor.class);
-        processor.processScore(args[0]);
-        
-		cdiContainer.shutdown();
-		System.out.println("CDI closed");
 	}
 	
-	
-	
+	private static void stopCDI(){
+		cdiContainer.shutdown();
+	}
 }

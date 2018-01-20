@@ -74,6 +74,41 @@
 		    <version>1.0</version>
 		</dependency>
 		
+		<dependency>
+		    <groupId>org.apache.deltaspike.modules</groupId>
+		    <artifactId>deltaspike-test-control-module-api</artifactId>
+		    <version>${deltaspike.version}</version>
+		    <scope>test</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.deltaspike.modules</groupId>
+		    <artifactId>deltaspike-test-control-module-impl</artifactId>
+		    <version>${deltaspike.version}</version>
+		    <scope>test</scope>
+		</dependency>
+		
+		<dependency>
+		     <groupId>org.apache.deltaspike.cdictrl</groupId>
+		     <artifactId>deltaspike-cdictrl-owb</artifactId>
+		     <version>${deltaspike.version}</version>
+		     <scope>test</scope>
+		 </dependency>
+		
+		<dependency>
+		    <groupId>org.apache.openwebbeans</groupId>
+		    <artifactId>openwebbeans-impl</artifactId>
+		    <version>${owb.version}</version>
+		    <scope>test</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <version>4.11</version>
+		    <scope>test</scope>
+		</dependency>
+		
   	</dependencies>
   
   

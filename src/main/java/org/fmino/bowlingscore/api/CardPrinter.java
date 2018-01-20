@@ -17,6 +17,10 @@ public interface CardPrinter {
 	 */
 	public void print(PlayerCard card);
 
+	/**
+	 * Prints score cards data from list
+	 * @param cards
+	 */
 	void print(List<PlayerCard> cards);
 	
 }
