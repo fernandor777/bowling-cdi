@@ -42,17 +42,17 @@ public class PlayerCardFacadeImpl implements PlayerCardFacade {
 		
 		PlayerFrame pf = new PlayerFrame(frame+1);
 		System.out.println("Frame: " + frame);
-		
+				
 		if(isStrike(card.getPinfalls(), pinfallIndex)){
 			pf.getScores().add("X");
-			pf.setFrameScore(10+StrikeBonus(card.getPinfalls(), pinfallIndex));
+			pf.setFrameScore(10+StrikeBonus(card.getPinfalls(), pinfallIndex, frame));
 			pinfallIndex++;
 			extras = 2;
 		}
 		else if(isSpare(card.getPinfalls(), pinfallIndex)){
 			pf.getScores().add(cardSignal(card.getPinfalls().get(pinfallIndex)));
 			pf.getScores().add("/");
-			pf.setFrameScore(10+SpareBonus(card.getPinfalls(), pinfallIndex));
+			pf.setFrameScore(10+SpareBonus(card.getPinfalls(), pinfallIndex, frame));
 			pinfallIndex+=2;
 			extras = 1;
 		}
@@ -81,12 +81,11 @@ public class PlayerCardFacadeImpl implements PlayerCardFacade {
 		if(extras<=0) return;
 		if(isStrike(card.getPinfalls(), pinfallIndex)){
 			pf.getScores().add("X");
-			pf.addFrameScore(10+StrikeBonus(card.getPinfalls(), pinfallIndex));
 		}
 		else{
 			pf.getScores().add(cardSignal(card.getPinfalls().get(pinfallIndex)));
-			pf.addFrameScore(card.getPinfalls().get(pinfallIndex).getScore());
 		}
+		pf.addFrameScore(card.getPinfalls().get(pinfallIndex).getScore());
 		extras--;
 		pinfallIndex++;
 		processExtra(card, pinfallIndex++, pf, extras);
@@ -113,13 +112,16 @@ public class PlayerCardFacadeImpl implements PlayerCardFacade {
 		return false;
 	}
 	
-	private Integer StrikeBonus(List<Pinfall> scores, Integer pinfallIndex){
+	private Integer StrikeBonus(List<Pinfall> scores, Integer pinfallIndex, Integer frame){
+		if(frame.intValue()==9) return 0;
 		return  ((pinfallIndex.intValue()+1 <= scores.size()-1) ? scores.get(pinfallIndex+1).getScore() : 0 )
 				+ ((pinfallIndex.intValue()+2 <= scores.size()-1) ? scores.get(pinfallIndex+2).getScore() : 0);
 	}
 	
-	private Integer SpareBonus(List<Pinfall> scores, Integer pinfallIndex){
-		return ((pinfallIndex.intValue()+1 <= scores.size()-1) ? scores.get(pinfallIndex+1).getScore() : 0 );
+	private Integer SpareBonus(List<Pinfall> scores, Integer pinfallIndex, Integer frame){
+		if(frame.intValue()==9) return 0;
+		return ((pinfallIndex.intValue()+2 <= scores.size()-1) ? 
+				scores.get(pinfallIndex+2).getScore() : 0 );
 	}
 	
 }

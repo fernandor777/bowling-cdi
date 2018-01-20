@@ -25,6 +25,13 @@ public class ConsoleCardPrinter implements CardPrinter {
 			framePinfalls(f);
 		});
 		pr("\n");
+		pr("Score");
+		Integer score = 0;
+		for(PlayerFrame f : card.getFrames()){
+			score = score + f.getFrameScore();
+			pr("\t\t" + score.toString());
+		}
+		pr("\n");
 	}
 	
 	@Override
@@ -55,6 +62,10 @@ public class ConsoleCardPrinter implements CardPrinter {
 				pr("\t" + s);
 			});
 		}
+	}
+	
+	private void printScore(){
+		
 	}
 	
 }
