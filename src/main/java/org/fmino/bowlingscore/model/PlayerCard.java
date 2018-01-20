@@ -1,6 +1,7 @@
 package org.fmino.bowlingscore.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,11 +11,20 @@ import java.util.List;
  */
 public class PlayerCard implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+	
 	private String name;
-	private List<Pinfall> pinfalls;
-	private List<PlayerFrame> frames;
+	private List<Pinfall> pinfalls = new ArrayList<>();
+	private List<PlayerFrame> frames = new ArrayList<>();
 	
 	public PlayerCard() {
+	}
+	
+	
+
+	public PlayerCard(String name) {
+		super();
+		this.name = name;
 	}
 
 	public List<PlayerFrame> getFrames() {
