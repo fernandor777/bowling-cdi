@@ -1,5 +1,7 @@
 package org.fmino.bowlingscore.api;
 
+import java.util.List;
+
 import org.fmino.bowlingscore.model.PlayerCard;
 
 /**
@@ -14,5 +16,7 @@ public interface CardPrinter {
 	 * @param card
 	 */
 	public void print(PlayerCard card);
+
+	void print(List<PlayerCard> cards);
 	
 }

@@ -40,8 +40,7 @@ public class BowlingScoreProcessorImpl implements BowlingScoreProcessor {
 		
 		List<PlayerCard> cards = cardFac.generateCards(scores);
 		
-		//scoresValidator.validate(scores);
-		
+		printer.print(cards);
 	}
 	
 	
