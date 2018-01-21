@@ -19,6 +19,14 @@ public class CardFacadeTest {
 	private PlayerCardFacadeImpl cardFac;
 	
 	@Test
+	public void getCardTest(){
+		
+	}
+	
+	
+	
+	
+	@Test
 	public void striketest(){
 		
 		List<Pinfall> scores = new ArrayList<>();
@@ -34,7 +42,9 @@ public class CardFacadeTest {
 		scores2.add(pf1);
 		
 		Assert.assertFalse(cardFac.isStrike(scores2, 0));
-		
 	}
+	
+	
+	
 	
 }

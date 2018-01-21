@@ -17,6 +17,13 @@ public class Pinfall implements Serializable {
 	public Pinfall() {
 	}
 
+	public Pinfall(String name, Integer score, Boolean fault) {
+		super();
+		this.name = name;
+		this.score = score;
+		this.fault = fault;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -31,6 +38,7 @@ public class Pinfall implements Serializable {
 
 	public void setScore(Integer score) {
 		this.score = score;
+		if(score.intValue()>0) fault = false;
 	}
 
 	public Boolean getFault() {
@@ -39,7 +47,7 @@ public class Pinfall implements Serializable {
 
 	public void setFault(Boolean fault) {
 		this.fault = fault;
-		this.score = 0;
+		if(fault) this.score = 0;
 	}
 	
 	

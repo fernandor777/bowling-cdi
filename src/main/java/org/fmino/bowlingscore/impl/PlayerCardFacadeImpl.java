@@ -95,12 +95,6 @@ public class PlayerCardFacadeImpl implements PlayerCardFacade {
 		return pinfall.getFault() ? "F" : pinfall.getScore().toString();
 	}
 	
-	protected Integer calculateScore(PlayerCard card, Integer pinfallIndex, Integer frame, Integer frameSub){
-		Integer score = 0;
-		//card.getPinfalls().get(pinfallIndex).get
-		return score;
-	}
-	
 	public Boolean isStrike(List<Pinfall> scores, Integer pinfallIndex){
 		if(scores.get(pinfallIndex).getScore().intValue()==10) return true;
 		return false;

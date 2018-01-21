@@ -64,8 +64,4 @@ public class ConsoleCardPrinter implements CardPrinter {
 		}
 	}
 	
-	private void printScore(){
-		
-	}
-	
 }
