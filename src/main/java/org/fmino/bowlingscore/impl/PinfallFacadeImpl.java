@@ -8,6 +8,11 @@ import javax.enterprise.context.ApplicationScoped;
 import org.fmino.bowlingscore.api.PinfallFacade;
 import org.fmino.bowlingscore.model.Pinfall;
 
+/**
+ * Pinfall domain logic implementation
+ * @author Fernando
+ *
+ */
 @ApplicationScoped
 public class PinfallFacadeImpl implements PinfallFacade {
 	

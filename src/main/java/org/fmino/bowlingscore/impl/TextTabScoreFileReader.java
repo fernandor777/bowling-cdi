@@ -32,6 +32,10 @@ public class TextTabScoreFileReader implements ScoreInputReader {
 	@Inject
 	private SingleInputValidator inputValidator;
 	
+	/**
+	 * Compute every file line as pinfall data row:
+	 */
+	@Override
 	public List<Pinfall> getPlayersUnitScoreList(String resource) {
 		List<Pinfall> scores = null;
 		try (Stream<String> fileStream = Files.lines(Paths.get(resource))){
@@ -51,6 +55,11 @@ public class TextTabScoreFileReader implements ScoreInputReader {
 		return scores;
 	}
 	
+	/**
+	 * Split by tab char to get player name, score value, and fault status
+	 * @param line
+	 * @return Pinfall data object
+	 */
 	private Pinfall lineToScore(String line){
 		Pinfall score = new Pinfall();
 		String[] splitted = line.split("\t");

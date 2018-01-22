@@ -2,19 +2,28 @@ package org.fmino.bowlingscore.impl;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import org.fmino.bowlingscore.api.PinfallFacade;
+import org.fmino.bowlingscore.api.PinfallsAmountException;
 import org.fmino.bowlingscore.api.PlayerCardFacade;
 import org.fmino.bowlingscore.model.Pinfall;
 import org.fmino.bowlingscore.model.PlayerCard;
 import org.fmino.bowlingscore.model.PlayerFrame;
 
+/**
+ * Player Card domain logic implementation
+ * @author Fernando
+ *
+ */
 @ApplicationScoped
 public class PlayerCardFacadeImpl implements PlayerCardFacade {
+	
+	private static final Logger LOG = Logger.getLogger(PlayerCardFacadeImpl.class.getName());
 	
 	@Inject
 	private PinfallFacade pinfallFac;
@@ -37,11 +46,16 @@ public class PlayerCardFacadeImpl implements PlayerCardFacade {
 		return card;
 	}
 	
+	/**
+	 * Process every frame in the player game, recursive
+	 * @param card
+	 * @param pinfallIndex
+	 * @param frame
+	 */
 	protected void processFrame(PlayerCard card, Integer pinfallIndex, Integer frame){
 		Integer extras = 0;
 		
 		PlayerFrame pf = new PlayerFrame(frame+1);
-		System.out.println("Frame: " + frame);
 				
 		if(isStrike(card.getPinfalls(), pinfallIndex)){
 			pf.getScores().add("X");
@@ -65,10 +79,6 @@ public class PlayerCardFacadeImpl implements PlayerCardFacade {
 		}
 		card.getFrames().add(pf);
 		
-		pf.getScores().forEach((s) -> {
-			System.out.println(s);
-		});
-		
 		if(frame.intValue()<9){
 			processFrame(card, pinfallIndex, frame+1);
 		}
@@ -77,8 +87,22 @@ public class PlayerCardFacadeImpl implements PlayerCardFacade {
 		}
 	}
 	
+	/**
+	 * process extra turns in frame 10, recursive
+	 * @param card
+	 * @param pinfallIndex
+	 * @param pf
+	 * @param extras
+	 */
 	protected void processExtra(PlayerCard card, Integer pinfallIndex, PlayerFrame pf, Integer extras){
-		if(extras<=0) return;
+		if(extras.intValue()<=0) {
+			// if exists more pinfall rows for this player, exception:
+			if(card.getPinfalls().size() >= pinfallIndex.intValue()+1){
+				LOG.severe("Player Pinfalls amount error!");
+				throw new PinfallsAmountException();
+			}
+			return;
+		}
 		if(isStrike(card.getPinfalls(), pinfallIndex)){
 			pf.getScores().add("X");
 		}
