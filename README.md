@@ -1,6 +1,11 @@
 # bowling-cdi
 10 bowling game implementation.
 
+## Get the sources from repo:
+```
+git clone https://github.com/fernandor777/bowling-cdi.git
+```
+
 ## Executing tests:
 ```
 mvn test
