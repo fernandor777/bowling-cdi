@@ -20,8 +20,13 @@ public class Pinfall implements Serializable {
 	public Pinfall(String name, Integer score, Boolean fault) {
 		super();
 		this.name = name;
-		this.score = score;
 		this.fault = fault;
+		if(fault){
+			this.score = 0;
+		}
+		else{
+			this.score = score;
+		}
 	}
 
 	public String getName() {
