@@ -16,7 +16,11 @@ import org.fmino.bowlingscore.model.PlayerFrame;
  */
 @Dependent
 public class ConsoleCardPrinter implements CardPrinter {
-
+	
+	public static final String STRIKE = "X";
+	public static final String SPARE = "/";
+	public static final String FAULT = "F";
+	
 	@Override
 	public void print(PlayerCard card) {
 		pr(card.getName() + "\n");

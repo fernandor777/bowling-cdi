@@ -1,6 +1,5 @@
 package org.fmino.bowlingscore.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,8 +39,7 @@ public class FrameFacadeImpl implements FrameFacade {
 	
 	@Override
 	public List<Pinfall> nextPinfalls(PlayerFrame frame, int number){
-		int frameIndex = frame.getNumber().intValue() - 1;
-		return frame.getCard().getFrames().stream().filter(f -> f.getNumber().intValue() > frameIndex)
+		return frame.getCard().getFrames().stream().filter(f -> f.getNumber().intValue() > frame.getNumber())
 			.flatMap(f -> f.getPinfalls().stream()).limit(number).collect(Collectors.toList());
 	}
 	
@@ -53,6 +51,7 @@ public class FrameFacadeImpl implements FrameFacade {
 	
 	@Override
 	public Boolean isSpare(List<Pinfall> scores){
+		if(isStrike(scores)) return false;
 		int sum = scores.get(0).getScore() + scores.get(1).getScore();
 		if(sum==10) {
 			return true;
