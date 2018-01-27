@@ -98,8 +98,7 @@ public class PlayerCardFacadeImpl implements PlayerCardFacade {
 		if(extras.intValue()<=0) {
 			// if exists more pinfall rows for this player, exception:
 			if(card.getPinfalls().size() >= pinfallIndex.intValue()+1){
-				LOG.severe("Player Pinfalls amount error!");
-				throw new PinfallsAmountException();
+				throw new PinfallsAmountException("Player Pinfalls amount error!", null);
 			}
 			return;
 		}

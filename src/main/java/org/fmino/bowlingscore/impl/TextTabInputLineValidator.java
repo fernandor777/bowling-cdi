@@ -23,7 +23,7 @@ public class TextTabInputLineValidator implements SingleInputValidator {
 	public void validate(String inputLine) {
 		Matcher m = validPattern.matcher(inputLine);
 		if ( !m.matches() || !checkScoreNumber(inputLine)){
-			throw new ScoreInputFormatException();
+			throw new ScoreInputFormatException("Input Format Error", null);
 		}
 	}
 	

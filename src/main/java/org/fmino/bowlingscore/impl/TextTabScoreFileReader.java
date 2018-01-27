@@ -48,8 +48,7 @@ public class TextTabScoreFileReader implements ScoreInputReader {
                 }}).collect(Collectors.toList());
 			
 		} catch (IOException e) {
-			LOG.log(Level.SEVERE, "IO error", e);
-			throw new ScoreInputFormatException();
+			throw new ScoreInputFormatException("Input Format Error", e);
 		}
 		
 		return scores;
