@@ -1,7 +1,6 @@
 package org.fmino.bowlingscore.impl;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;

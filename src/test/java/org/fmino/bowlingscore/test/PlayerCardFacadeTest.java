@@ -15,7 +15,6 @@ import org.fmino.bowlingscore.api.PlayerCardFacade;
 import org.fmino.bowlingscore.impl.TextTabScoreFileReader;
 import org.fmino.bowlingscore.model.Pinfall;
 import org.fmino.bowlingscore.model.PlayerCard;
-import org.fmino.bowlingscore.model.PlayerFrame;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

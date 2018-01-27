@@ -2,7 +2,6 @@ package org.fmino.bowlingscore;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 
 import org.apache.deltaspike.cdise.api.CdiContainer;

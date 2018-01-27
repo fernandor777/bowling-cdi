@@ -4,7 +4,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -12,8 +11,6 @@ import org.apache.deltaspike.testcontrol.api.junit.CdiTestRunner;
 import org.fmino.bowlingscore.api.BowlingGame;
 import org.fmino.bowlingscore.api.PinfallsAmountException;
 import org.fmino.bowlingscore.api.ScoreInputReader;
-import org.fmino.bowlingscore.impl.BowlingGameImpl;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
