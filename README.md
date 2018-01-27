@@ -1,6 +1,14 @@
 # bowling-cdi
 10 bowling game implementation.
 
+## Dependencies and environment
+This application is based on Java EE dependency injection standard CDI.
+
+There are the main packages in the layout:
+* org.fmino.bowlingscore.model:  serializable data models
+* org.fmino.bowlingscore.api: provides the API interfaces and Exceptions for new swappable implementations (api jar + impl jar swap)
+* org.fmino.bowlingscore.impl: Our current implementation
+
 ## Get the sources from repo:
 ```
 git clone https://github.com/fernandor777/bowling-cdi.git
