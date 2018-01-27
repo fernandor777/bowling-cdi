@@ -24,27 +24,6 @@ public class BowlingGameTest {
 	@Inject
 	private ScoreInputReader reader;
 	
-	@Test
-	public void testRegularGame() throws URISyntaxException{
-		URL url = this.getClass().getResource("/pinfalls/scores.txt");
-		Path path = Paths.get(url.toURI());
-		
-		game.setPinfalls(reader.getPlayersUnitScoreList(path.toString()));
-		// two players
-		Assert.assertTrue(game.getCards().size()==2);
-		
-		int pointsJeff = game.getCards().stream().filter(c -> c.getName().equals("Jeff"))
-				.map(c -> c.getFrames().stream()
-						.map(f -> f.getFrameScore()).collect(Collectors.summingInt(Integer::intValue)) )
-				.collect(Collectors.summingInt(Integer::intValue));
-		Assert.assertEquals(pointsJeff, 167);
-		
-		int pointsJohn = game.getCards().stream().filter(c -> c.getName().equals("John"))
-				.map(c -> c.getFrames().stream()
-						.map(f -> f.getFrameScore()).collect(Collectors.summingInt(Integer::intValue)) )
-				.collect(Collectors.summingInt(Integer::intValue));
-		Assert.assertEquals(pointsJohn, 151);
-	}
 	
 	@Test(expected = PinfallsAmountException.class)
 	public void testbadAmountPinfalls() throws URISyntaxException{
