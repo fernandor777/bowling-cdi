@@ -18,7 +18,7 @@ import org.fmino.bowlingscore.model.Pinfall;
 import org.fmino.bowlingscore.model.PlayerCard;
 
 /**
- * Data Processor Reference implementation 
+ * Data Processor Reference implementation, using file system resource
  * @author Fernando
  *
  */

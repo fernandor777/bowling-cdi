@@ -10,7 +10,7 @@ public interface BowlingScoreProcessor {
 	
 	/**
 	 * Load pinfalls list from resource, instance BowlingGame and print Score Cards
-	 * @param resource
+	 * @param resource is an resource string identifier, can represent file system, http resources, JDNI resources
 	 */
 	void processScore(String resource);
 	

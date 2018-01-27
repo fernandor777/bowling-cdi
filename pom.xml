@@ -145,6 +145,12 @@
 		    <configuration>
 		        <finalName>${project.artifactId}</finalName>
 		        <outputDirectory>${project.build.directory}/dist/bin</outputDirectory>
+		        <archive>
+		            <manifest>
+		              <addClasspath>true</addClasspath>
+		              <mainClass>org.fmino.bowlingscore.BowlingScoreAppMain</mainClass>
+		            </manifest>
+		          </archive>
 		    </configuration>
 		</plugin>
     </plugins>
