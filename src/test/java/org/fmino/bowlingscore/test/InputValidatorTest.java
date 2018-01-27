@@ -1,5 +1,7 @@
 package org.fmino.bowlingscore.test;
 
+import java.util.logging.Logger;
+
 import javax.inject.Inject;
 
 import org.apache.deltaspike.testcontrol.api.junit.CdiTestRunner;
@@ -10,12 +12,21 @@ import org.junit.runner.RunWith;
 
 @RunWith(CdiTestRunner.class)
 public class InputValidatorTest {
+	
+	private static final Logger LOG = Logger.getLogger(InputValidatorTest.class.getName());
+	
 	@Inject
 	private SingleInputValidator validator;
 	
 	@Test
 	public void testValid(){
 		String c1 = "Fer\t0";
+		validator.validate(c1);
+	}
+	
+	@Test
+	public void testValidSpaces(){
+		String c1 = "Fer   0";
 		validator.validate(c1);
 	}
 	

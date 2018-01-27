@@ -20,7 +20,6 @@ public class TextTabInputLineValidator implements SingleInputValidator {
 	private Pattern validPattern;
 	
 	public void validate(String inputLine) {
-		System.out.println("validating line: " + inputLine);
 		Matcher m = validPattern.matcher(inputLine);
 		if ( !m.matches() || !checkScoreNumber(inputLine)){
 			throw new ScoreInputFormatException();
@@ -29,7 +28,7 @@ public class TextTabInputLineValidator implements SingleInputValidator {
 	
 	@PostConstruct
 	public void init(){
-		validPattern = Pattern.compile("^[a-zA-Z]*\\t(\\d{1,2}|F)");
+		validPattern = Pattern.compile("^[a-zA-Z]+\\s+(\\d{1,2}|F)");
 	}
 	
 	/**
@@ -38,7 +37,7 @@ public class TextTabInputLineValidator implements SingleInputValidator {
 	 * @return
 	 */
 	public boolean checkScoreNumber(String inputLine){
-		String[] splitted = inputLine.split("\\t");
+		String[] splitted = inputLine.split("\\s+");
 		if(splitted[1].equals("F")) return true;
 		int value = Integer.valueOf(splitted[1]).intValue();
 		if(value>=0 && value<=10) return true;
