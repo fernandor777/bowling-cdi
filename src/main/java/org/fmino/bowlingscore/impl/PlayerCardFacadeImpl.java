@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.fmino.bowlingscore.api.FrameFacade;
 import org.fmino.bowlingscore.api.PinfallFacade;
 import org.fmino.bowlingscore.api.PinfallsAmountException;
 import org.fmino.bowlingscore.api.PlayerCardFacade;
@@ -27,6 +28,8 @@ public class PlayerCardFacadeImpl implements PlayerCardFacade {
 	
 	@Inject
 	private PinfallFacade pinfallFac;
+	@Inject
+	private FrameFacade frameFac;
 	
 	@Override
 	public List<PlayerCard> generateCards(List<Pinfall> scores){
