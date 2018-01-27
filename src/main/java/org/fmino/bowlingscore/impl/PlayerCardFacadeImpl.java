@@ -56,69 +56,22 @@ public class PlayerCardFacadeImpl implements PlayerCardFacade {
 	 * @param frame
 	 */
 	protected void processFrame(PlayerCard card, Integer pinfallIndex, Integer frame){
-		Integer extras = 0;
-		
-		PlayerFrame pf = new PlayerFrame(frame+1);
-				
-		if(isStrike(card.getPinfalls(), pinfallIndex)){
-			pf.getScores().add("X");
-			pf.setFrameScore(10+StrikeBonus(card.getPinfalls(), pinfallIndex, frame));
-			pinfallIndex++;
-			extras = 2;
+		PlayerFrame pf = null;
+		int pinfallsAmount = 2;
+		if(isStrike(card.getPinfalls(), pinfallIndex) && frame.intValue()<9){
+			pinfallsAmount = 1;
 		}
-		else if(isSpare(card.getPinfalls(), pinfallIndex)){
-			pf.getScores().add(cardSignal(card.getPinfalls().get(pinfallIndex)));
-			pf.getScores().add("/");
-			pf.setFrameScore(10+SpareBonus(card.getPinfalls(), pinfallIndex, frame));
-			pinfallIndex+=2;
-			extras = 1;
+		else if(frame.intValue()==9){ 
+			pinfallsAmount = 3;
 		}
-		else{ 
-			pf.getScores().add(cardSignal(card.getPinfalls().get(pinfallIndex)));
-			pf.getScores().add(cardSignal(card.getPinfalls().get(pinfallIndex+1)));
-			pf.setFrameScore(card.getPinfalls().get(pinfallIndex).getScore()
-					+card.getPinfalls().get(pinfallIndex+1).getScore());
-			pinfallIndex+=2;
-		}
+		pf = frameFac.getFrame( card.getPinfalls().stream().skip(pinfallIndex).limit(pinfallsAmount).collect(Collectors.toList())
+				, frame+1, card);
 		card.getFrames().add(pf);
 		
 		if(frame.intValue()<9){
+			pinfallIndex+=pinfallsAmount;
 			processFrame(card, pinfallIndex, frame+1);
 		}
-		else {
-			processExtra(card, pinfallIndex, pf, extras);
-		}
-	}
-	
-	/**
-	 * process extra turns in frame 10, recursive
-	 * @param card
-	 * @param pinfallIndex
-	 * @param pf
-	 * @param extras
-	 */
-	protected void processExtra(PlayerCard card, Integer pinfallIndex, PlayerFrame pf, Integer extras){
-		if(extras.intValue()<=0) {
-			// if exists more pinfall rows for this player, exception:
-			if(card.getPinfalls().size() >= pinfallIndex.intValue()+1){
-				throw new PinfallsAmountException("Player Pinfalls amount error!", null);
-			}
-			return;
-		}
-		if(isStrike(card.getPinfalls(), pinfallIndex)){
-			pf.getScores().add("X");
-		}
-		else{
-			pf.getScores().add(cardSignal(card.getPinfalls().get(pinfallIndex)));
-		}
-		pf.addFrameScore(card.getPinfalls().get(pinfallIndex).getScore());
-		extras--;
-		pinfallIndex++;
-		processExtra(card, pinfallIndex++, pf, extras);
-	}
-	
-	protected String cardSignal(Pinfall pinfall){
-		return pinfall.getFault() ? "F" : pinfall.getScore().toString();
 	}
 	
 	public Boolean isStrike(List<Pinfall> scores, Integer pinfallIndex){
@@ -126,22 +79,6 @@ public class PlayerCardFacadeImpl implements PlayerCardFacade {
 		return false;
 	}
 	
-	private Boolean isSpare(List<Pinfall> scores, Integer pinfallIndex){
-		Integer sum = scores.get(pinfallIndex).getScore() + scores.get(pinfallIndex+1).getScore();
-		if(sum.intValue()==10) return true;
-		return false;
-	}
 	
-	private Integer StrikeBonus(List<Pinfall> scores, Integer pinfallIndex, Integer frame){
-		if(frame.intValue()==9) return 0;
-		return  ((pinfallIndex.intValue()+1 <= scores.size()-1) ? scores.get(pinfallIndex+1).getScore() : 0 )
-				+ ((pinfallIndex.intValue()+2 <= scores.size()-1) ? scores.get(pinfallIndex+2).getScore() : 0);
-	}
-	
-	private Integer SpareBonus(List<Pinfall> scores, Integer pinfallIndex, Integer frame){
-		if(frame.intValue()==9) return 0;
-		return ((pinfallIndex.intValue()+2 <= scores.size()-1) ? 
-				scores.get(pinfallIndex+2).getScore() : 0 );
-	}
 	
 }

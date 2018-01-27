@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import javax.inject.Inject;
 
 import org.apache.deltaspike.testcontrol.api.junit.CdiTestRunner;
+import org.fmino.bowlingscore.api.FrameFacade;
 import org.fmino.bowlingscore.api.PlayerCardFacade;
 import org.fmino.bowlingscore.impl.TextTabScoreFileReader;
 import org.fmino.bowlingscore.model.Pinfall;
@@ -25,6 +26,8 @@ public class PlayerCardFacadeTest {
 	private PlayerCardFacade cardFac;
 	@Inject
 	private TextTabScoreFileReader reader;
+	@Inject
+	private FrameFacade frameFac;
 	
 	class Sum {
 		private int value = 0;
@@ -54,10 +57,7 @@ public class PlayerCardFacadeTest {
 		
 		PlayerCard c1 = cards.get(0);
 		c1.getFrames().forEach( c -> {
-			c.getScores().forEach(s -> {
-				Assert.assertTrue(s.equals(PlayerFrame.STRIKE));
-			});
-			sum.add(c.getFrameScore());
+			sum.add(frameFac.getScore(c));
 		});
 		Assert.assertTrue(sum.getValue()==300);
 	}
@@ -77,7 +77,7 @@ public class PlayerCardFacadeTest {
 			c.getScores().forEach(s -> {
 				Assert.assertTrue(s.equals("0"));
 			});
-			sum.add(c.getFrameScore());
+			sum.add(frameFac.getScore(c));
 		});
 		Assert.assertTrue(sum.getValue()==0);
 	}
@@ -90,17 +90,22 @@ public class PlayerCardFacadeTest {
 		List<PlayerCard> cards = cardFac.generateCards(pfl);
 		Assert.assertTrue(cards.size()==2);
 		
-		int pointsJeff = cards.stream().filter(c -> c.getName().equals("Jeff"))
-				.map(c -> c.getFrames().stream()
-						.map(f -> f.getFrameScore()).collect(Collectors.summingInt(Integer::intValue)) )
-				.collect(Collectors.summingInt(Integer::intValue));
-		Assert.assertEquals(pointsJeff, 167);
+		Sum sum = new Sum();
 		
-		int pointsJohn = cards.stream().filter(c -> c.getName().equals("John"))
-				.map(c -> c.getFrames().stream()
-						.map(f -> f.getFrameScore()).collect(Collectors.summingInt(Integer::intValue)) )
-				.collect(Collectors.summingInt(Integer::intValue));
-		Assert.assertEquals(pointsJohn, 151);
+		cards.stream().filter(c -> c.getName().equals("Jeff"))
+				.flatMap( c1 -> c1.getFrames().stream()).
+				collect(Collectors.toList()).forEach( f -> {
+					sum.add(frameFac.getScore(f));
+				});
+		Assert.assertEquals(sum.value, 167);
+		
+		Sum sum2 = new Sum();
+		cards.stream().filter(c -> c.getName().equals("John"))
+				.flatMap( c1 -> c1.getFrames().stream()).
+				collect(Collectors.toList()).forEach( f -> {
+					sum2.add(frameFac.getScore(f));
+				});
+		Assert.assertEquals(sum2.value, 151);
 	}
 	
 }
