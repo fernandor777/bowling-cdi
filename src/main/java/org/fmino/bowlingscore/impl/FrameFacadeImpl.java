@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import javax.enterprise.context.Dependent;
 
 import org.fmino.bowlingscore.api.FrameFacade;
+import org.fmino.bowlingscore.api.ScoreInputFormatException;
 import org.fmino.bowlingscore.model.Pinfall;
 import org.fmino.bowlingscore.model.PlayerCard;
 import org.fmino.bowlingscore.model.PlayerFrame;
@@ -18,6 +19,9 @@ public class FrameFacadeImpl implements FrameFacade {
 		PlayerFrame frame = new PlayerFrame(frameNumber);
 		frame.setPinfalls(pfs);
 		frame.setCard(card);
+		if(frameNumber<10 && pfs.stream().mapToInt(Pinfall::getScore).sum()>10){
+			throw new ScoreInputFormatException("Bad frame pinfalls score sum", null);
+		}
 		return frame;
 	}
 	

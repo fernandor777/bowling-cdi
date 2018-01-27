@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.apache.deltaspike.testcontrol.api.junit.CdiTestRunner;
 import org.fmino.bowlingscore.api.FrameFacade;
+import org.fmino.bowlingscore.api.ScoreInputFormatException;
 import org.fmino.bowlingscore.model.Pinfall;
 import org.fmino.bowlingscore.model.PlayerCard;
 import org.fmino.bowlingscore.model.PlayerFrame;
@@ -19,6 +20,16 @@ public class FrameFacadeTest {
 	
 	@Inject
 	private FrameFacade frameFac;
+	
+	@Test(expected=ScoreInputFormatException.class)
+	public void getFrameSumException(){
+		PlayerCard card = new PlayerCard();
+		List<Pinfall> pfs = new ArrayList<>();
+		pfs.add(new Pinfall("fer", 5, false));
+		pfs.add(new Pinfall("fer", 6, false));
+		
+		frameFac.getFrame(pfs, 2, card);
+	}
 	
 	@Test
 	public void isStrikeTestOk(){

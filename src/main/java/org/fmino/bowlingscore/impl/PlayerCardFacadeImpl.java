@@ -62,7 +62,10 @@ public class PlayerCardFacadeImpl implements PlayerCardFacade {
 			pinfallsAmount = 1;
 		}
 		else if(frame.intValue()==9){ 
-			pinfallsAmount = 3;
+			pinfallsAmount = isStrike(card.getPinfalls(), pinfallIndex) ? 3 : 2;
+			if(card.getPinfalls().size()-1 > pinfallIndex + pinfallsAmount -1 ){
+				throw new PinfallsAmountException("Bad pinfall amount for player", null);
+			}
 		}
 		pf = frameFac.getFrame( card.getPinfalls().stream().skip(pinfallIndex).limit(pinfallsAmount).collect(Collectors.toList())
 				, frame+1, card);
