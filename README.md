@@ -1,6 +1,11 @@
 # bowling-cdi
 10 bowling game implementation.
 
+## Get the sources from repo:
+```
+git clone https://github.com/fernandor777/bowling-cdi.git
+```
+
 ## Executing tests:
 ```
 mvn test
@@ -21,10 +26,14 @@ java -cp "target/dist/bin/*;target/dist/lib/*;." org.fmino.bowlingscore.BowlingS
 ```
 
 Provided good example files:
-    src\test\resources\pinfalls\scores.txt
-    src\test\resources\pinfalls\zeroes.txt
-    src\test\resources\pinfalls\perfect.txt
-
+```
+    src/test/resources/pinfalls/scores.txt
+    src/test/resources/pinfalls/zeroes.txt
+    src/test/resources/pinfalls/perfect.txt
+```
+    
 Provided bad example files (for exceptions catch):
-    src\test\resources\pinfalls\bad-scores-value.txt
-    src\test\resources\pinfalls\bad-scores-amount.txt
+```
+    src/test/resources/pinfalls/bad-scores-value.txt
+    src/test/resources/pinfalls/bad-scores-amount.txt
+```
