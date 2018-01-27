@@ -18,7 +18,7 @@ public class PinfallFacadeImpl implements PinfallFacade {
 	
 	@Override
 	public List<String> getPlayers(List<Pinfall> scores){
-		return scores.stream().map(p -> p.getName())
+		return scores.stream().map(Pinfall::getName)
 				.distinct().collect(Collectors.toList());
 	}
 	

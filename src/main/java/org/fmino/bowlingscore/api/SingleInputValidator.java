@@ -11,6 +11,6 @@ public interface SingleInputValidator {
 	 * validator method for single score input, may throw a ScoreInputFormatException
 	 * @param inputLine
 	 */
-	public void validate(String inputLine);
+	void validate(String inputLine);
 	
 }

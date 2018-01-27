@@ -29,4 +29,14 @@ public class FileReaderTest {
 		});
 	}
 	
+	@Test
+	public void testReaderSpaces() throws URISyntaxException{
+		URL url = this.getClass().getResource("/pinfalls/perfect-with-spaces.txt");
+		Path path = Paths.get(url.toURI());
+		reader.getPlayersUnitScoreList(path.toString()).forEach(p -> {
+			Assert.assertTrue(p.getScore().intValue()==10 && p.getName().equals("Carl") 
+					&& p.getFault().equals(Boolean.FALSE));
+		});
+	}
+	
 }

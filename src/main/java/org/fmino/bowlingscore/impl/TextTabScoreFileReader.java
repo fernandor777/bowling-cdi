@@ -2,7 +2,6 @@ package org.fmino.bowlingscore.impl;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.function.Function;
@@ -18,6 +17,7 @@ import org.fmino.bowlingscore.api.ScoreInputFormatException;
 import org.fmino.bowlingscore.api.ScoreInputReader;
 import org.fmino.bowlingscore.api.SingleInputValidator;
 import org.fmino.bowlingscore.model.Pinfall;
+import org.fmino.bowlingscore.model.PlayerFrame;
 
 /**
  * Score File Reader in Text format, tab separated
@@ -62,9 +62,9 @@ public class TextTabScoreFileReader implements ScoreInputReader {
 	 */
 	private Pinfall lineToScore(String line){
 		Pinfall score = new Pinfall();
-		String[] splitted = line.split("\t");
+		String[] splitted = line.split("\\s+");
 		score.setName(splitted[0]);
-		if(splitted[1].equals("F")){
+		if(splitted[1].equals(PlayerFrame.FAULT)){
 			score.setScore(0);
 			score.setFault(true);
 		}

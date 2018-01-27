@@ -16,7 +16,7 @@ public interface BowlingScoreProcessor {
 	 * Load pinfalls list from resource, instance BowlingGame and print Score Cards
 	 * @param resource
 	 */
-	public void processScore(String resource);
+	void processScore(String resource);
 	
 	
 }

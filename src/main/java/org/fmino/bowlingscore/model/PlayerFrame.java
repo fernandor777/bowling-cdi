@@ -18,7 +18,7 @@ public class PlayerFrame implements Serializable {
 	private Integer number;
 	private List<String> scores = new ArrayList<>();
 	private Integer frameScore = 0;
-	
+	private List<Pinfall> pinfalls = new ArrayList<>();
 	
 	public PlayerFrame() {
 	}
@@ -57,6 +57,14 @@ public class PlayerFrame implements Serializable {
 
 	public void setFrameScore(Integer frameScore) {
 		this.frameScore = frameScore;
+	}
+
+	public List<Pinfall> getPinfalls() {
+		return pinfalls;
+	}
+
+	public void setPinfalls(List<Pinfall> pinfalls) {
+		this.pinfalls = pinfalls;
 	}
 	
 	

@@ -11,7 +11,7 @@ public interface ScoreInputReader {
 	 * @param resource data resource
 	 * @return
 	 */
-	public List<Pinfall> getPlayersUnitScoreList(String resource);
+	List<Pinfall> getPlayersUnitScoreList(String resource);
 	
 	
 	

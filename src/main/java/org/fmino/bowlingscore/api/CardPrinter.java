@@ -15,7 +15,7 @@ public interface CardPrinter {
 	 * Prints score card data
 	 * @param card
 	 */
-	public void print(PlayerCard card);
+	void print(PlayerCard card);
 
 	/**
 	 * Prints score cards data from list
