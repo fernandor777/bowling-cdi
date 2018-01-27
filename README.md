@@ -12,6 +12,17 @@ There are the main packages in the layout:
 ### CDI comppatibility:
 Current implementation is CDI >= 1.2 compatible, with certified implementations: Apache OpenWebbeans or Weld. Also can be used in JavaEE 7 servers as Apache TomEE, Glassfish, Jboss Wildfly, Payara server, IBM Websphere, Oracle Weblogic and more.
 
+## CDI usage
+Field Injection:
+```java
+    @Inject
+    private BowlingScoreProcessor processor;
+```
+
+Filesystem path resource process:
+```java
+    processor.processScore("/home/bowling/score-180127.txt");
+```
 
 ## Get the sources from repo:
 ```
