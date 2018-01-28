@@ -9,7 +9,7 @@ There are the main packages in the layout:
 * org.fmino.bowlingscore.api: provides the API interfaces and Exceptions for new swappable implementations (api jar + impl jar swap)
 * org.fmino.bowlingscore.impl: Our current implementation
 
-### CDI comppatibility:
+### CDI compatibility:
 Current implementation is CDI >= 1.2 compatible, with certified implementations: Apache OpenWebbeans or Weld. Also can be used in JavaEE 7 servers as Apache TomEE, Glassfish, Jboss Wildfly, Payara server, IBM Websphere, Oracle Weblogic and more.
 
 ## CDI usage
