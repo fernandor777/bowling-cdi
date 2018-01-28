@@ -73,9 +73,6 @@ public class PlayerCardFacadeTest {
 		
 		PlayerCard c1 = cards.get(0);
 		c1.getFrames().forEach( c -> {
-			c.getScores().forEach(s -> {
-				Assert.assertTrue(s.equals("0"));
-			});
 			sum.add(frameFac.getScore(c));
 		});
 		Assert.assertTrue(sum.getValue()==0);
